@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Stompy Bug Tracker",
+  "name": "Stompy Bug Tracker front end in React",
   "icons": [
     {
       "src": "favicon.ico",

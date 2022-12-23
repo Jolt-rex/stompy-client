@@ -91,37 +91,37 @@ const LoginForm = ({ onLogin }) => {
   if(auth.getCurrentUser()) return <Navigate replace to='/' />
 
   return (
-    <>
-      <div className="container">
-        <div className="card">
-          <div className="form">
+    <div className="container">
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
             <div className="register">
               <p>Not a member? <a href="register">Register Now</a></p>
-            </div>
-            <div className="hello">
-              <h2>Hello Again!</h2>
-              <h4>Welcome back you have been missed! </h4>
-            </div>
-            <form onSubmit={handleSubmit}>
-              <div className="input_text">
-                <input className={` ${errors.email ? "warning" : "" }`} type="text" placeholder="Enter Email" name="email" value={email} onChange={handleChangeEmail} />
-                <p className={` ${errors.email ? "danger" : "" }`}><i className="fa fa-warning"></i>Please enter a valid email address.</p>
-              </div>
-              <div className="input_text">
-                <input className={` ${errors.password ? "warning" : "" }`} type={passwordView} placeholder="Enter Password" name="password" value={password} onChange={handleChangePassword} />
-              {passwordView === "text" ? <VisibilityIcon onClick={handleChangeEye} /> : <VisibilityOffIcon onClick={handleChangeEye} />}    
-              </div>
-              <div className="recovery">
-                <p>Recovery Password</p>
-              </div>
-              <div className="btn">
-                <button type="submit">Sign in</button>
-              </div>
-            </form>
           </div>
         </div>
-      </div>
-    </>
+        <div className="input-group mb-3">
+          <label for="inputEmail">Email address</label>
+          <input className={"form-control" + ` ${errors.email ? "warning" : "" }`} type="email" placeholder="Enter Email" name="email" value={email} onChange={handleChangeEmail} />
+          <p className={` ${errors.email ? "danger" : "" }`}>Please enter a valid email address.</p>
+        </div>
+        <div className="input-group mb-3">
+          
+          <label for="inputPassword">Password</label>
+          <input className={"form-control" + ` ${errors.password ? "warning" : ""}`} type={passwordView} placeholder="Enter Password" name="password" value={password} onChange={handleChangePassword} />
+          <div className="input-group-append">
+            <div className="input-group-text" id="basic-addon2">
+              {passwordView === "text" ? <VisibilityIcon onClick={handleChangeEye} /> : <VisibilityOffIcon onClick={handleChangeEye} />}    
+          
+            </div>
+          </div>
+        </div>
+            <div className="recovery">
+              <p>Recover Password</p>
+            </div>
+          <div className="btn">
+            <button type="submit">Sign in</button>
+          </div>
+      </form>
+    </div>
   );
 }
  

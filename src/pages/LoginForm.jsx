@@ -82,28 +82,35 @@ const LoginForm = ({ onLogin }) => {
   if(auth.getCurrentUser()) return <Navigate replace to='/' />
 
   return (
-    <>
-      <div className="pt-4 pb-4"></div>
-      <div className="container pt-4 pb-4" style={{"width":"40%"}}>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group pb-3">
-            <label >Not a member? <a href="register">Register now</a></label>
+    <div className="container">
+      <div className="row">
+        <div className="col-sm-4"></div>
+        <div className="col-sm-4">
+          <div className="pt-4 pb-4"></div>
+          <div className="pl-4 pr-4 pt-4 pb-4" >
+            <form className="form" onSubmit={handleSubmit}>
+              <div className="form-group pb-3">
+                <label >Not a member? <a href="register">Register now</a></label>
+              </div>
+              <div className="form-group pb-3">
+                <label className="">Email address</label>
+                <input type="email" className={"form-control" + (errors.email ? " warning" : "")} placeholder="Enter email" name="email" value={email} onChange={handleChangeEmail} />
+                {errors.email ? <small className="form-text text-danger" >{errors.email}</small> :
+                  <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>}
+              </div>
+              <div className="form-group">
+                <label>Password</label>
+                <input type="password" className={"form-control" + (errors.password ? " warning" : "")} placeholder="Password" name="password" value={password} onChange={handleChangePassword} />
+                {errors.password && <small className="form-text text-danger" >{errors.password}</small> }
+              </div>
+              <div className="form-group pt-3">
+                <button type="submit" className="btn btn-primary">Submit</button>
+              </div>
+            </form>
           </div>
-          <div className="form-group pb-3">
-            <label>Email address</label>
-            <input type="email" className={"form-control" + (errors.email ? "warning" : "" )} id="inputEmail" placeholder="Enter email" name="email" value={email} onChange={handleChangeEmail} /> 
-            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-          </div>
-          <div className="form-group">
-            <label>Password</label>
-            <input type="password" className={"form-control" + (errors.password ? "warning" : "")} id="exampleInputPassword1" placeholder="Password" name="password" value={password} onChange={handleChangePassword} />
-          </div>
-          <div className="form-group pt-3">
-            <button type="submit" className="btn btn-primary">Submit</button>
-          </div>
-        </form>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
  

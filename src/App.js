@@ -35,7 +35,6 @@ function App() {
           <Route path="login" element={<LoginForm onLogin={onLogin} />} />
           <Route path="logout" element={<LoginForm onLogin={onLogout} />} />
           <Route path="*" element={<NoPage />} />
-          
         </Route>
       </Routes>
     </BrowserRouter>

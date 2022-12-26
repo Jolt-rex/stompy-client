@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import Joi from 'joi';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import auth from '../services/authService';
 
 const LoginForm = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
-  const [passwordView, setPasswordView] = useState("password");
   const [schema] = useState({
       email: Joi.string().min(5).max(255).required().email({ tlds: { allow: false } }).label('Email'),
       password: Joi.string().min(5).max(255).required().label('Password')
@@ -65,12 +62,6 @@ const LoginForm = ({ onLogin }) => {
     doSubmit();
   };
 
-  function handleChangeEye() {
-    if (passwordView === "password")
-      setPasswordView("text");
-    else
-      setPasswordView("password");
-  }
 
   async function doSubmit() {
     try {
@@ -91,37 +82,28 @@ const LoginForm = ({ onLogin }) => {
   if(auth.getCurrentUser()) return <Navigate replace to='/' />
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-            <div className="register">
-              <p>Not a member? <a href="register">Register Now</a></p>
+    <>
+      <div className="pt-4 pb-4"></div>
+      <div className="container pt-4 pb-4" style={{"width":"40%"}}>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group pb-3">
+            <label >Not a member? <a href="register">Register now</a></label>
           </div>
-        </div>
-        <div className="input-group mb-3">
-          <label for="inputEmail">Email address</label>
-          <input className={"form-control" + ` ${errors.email ? "warning" : "" }`} type="email" placeholder="Enter Email" name="email" value={email} onChange={handleChangeEmail} />
-          <p className={` ${errors.email ? "danger" : "" }`}>Please enter a valid email address.</p>
-        </div>
-        <div className="input-group mb-3">
-          
-          <label for="inputPassword">Password</label>
-          <input className={"form-control" + ` ${errors.password ? "warning" : ""}`} type={passwordView} placeholder="Enter Password" name="password" value={password} onChange={handleChangePassword} />
-          <div className="input-group-append">
-            <div className="input-group-text" id="basic-addon2">
-              {passwordView === "text" ? <VisibilityIcon onClick={handleChangeEye} /> : <VisibilityOffIcon onClick={handleChangeEye} />}    
-          
-            </div>
+          <div className="form-group pb-3">
+            <label>Email address</label>
+            <input type="email" className={"form-control" + (errors.email ? "warning" : "" )} id="inputEmail" placeholder="Enter email" name="email" value={email} onChange={handleChangeEmail} /> 
+            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
-        </div>
-            <div className="recovery">
-              <p>Recover Password</p>
-            </div>
-          <div className="btn">
-            <button type="submit">Sign in</button>
+          <div className="form-group">
+            <label>Password</label>
+            <input type="password" className={"form-control" + (errors.password ? "warning" : "")} id="exampleInputPassword1" placeholder="Password" name="password" value={password} onChange={handleChangePassword} />
           </div>
-      </form>
-    </div>
+          <div className="form-group pt-3">
+            <button type="submit" className="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
  

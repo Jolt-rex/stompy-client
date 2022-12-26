@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import Bugs from './pages/Bugs';
 import LoginForm from './pages/LoginForm';
+import Logout from './pages/Logout';
 import NoPage from './pages/NoPage';
 import auth from './services/authService';
 
@@ -20,7 +21,7 @@ function App() {
 
   const onLogout = () => {
     auth.logout();
-    setUser({});
+    setUser(null);
   };
   
 
@@ -33,7 +34,7 @@ function App() {
           <Route path="projects" element={<Projects />} />
           <Route path="bugs" element={<Bugs />} />
           <Route path="login" element={<LoginForm setUser={setUser} />} />
-          <Route path="logout" element={<LoginForm onLogin={onLogout} />} />
+          <Route path="logout" element={<Logout onLogout={onLogout} />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

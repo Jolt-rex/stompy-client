@@ -4,7 +4,7 @@ import Joi from 'joi';
 import auth from '../services/authService';
 import './styles.css';
 
-const LoginForm = ({ user, onLogin }) => {
+const LoginForm = ({ user, setUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
@@ -67,9 +67,10 @@ const LoginForm = ({ user, onLogin }) => {
   async function doSubmit() {
     try {
       await auth.login({ email, password });
-      onLogin();
-      const { state } = this.props.location;
-      window.location = state ? state.from.pathname : '/';
+      const user = auth.getCurrentUser();
+      setUser(user);
+
+      window.location = '/';
     }
     catch (ex) {
       if (ex.response && ex.response.status === 400) {

@@ -17,7 +17,7 @@ function setJwt(jwt) {
 }
 
 function clearJwt() {
-  delete axios.detauls.headers.common['x-auth-token'];
+  delete axios.defaults.headers.common['x-auth-token'];
 }
 
 const exported = {

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import Joi from 'joi';
 import auth from '../services/authService';
+import './styles.css';
 
-const LoginForm = ({ onLogin }) => {
+const LoginForm = ({ user, onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
@@ -83,31 +84,29 @@ const LoginForm = ({ onLogin }) => {
 
   return (
     <div className="container">
+      <div className="row spacer"></div>
       <div className="row">
-        <div className="col-sm-4"></div>
-        <div className="col-sm-4">
-          <div className="pt-4 pb-4"></div>
-          <div className="pl-4 pr-4 pt-4 pb-4" >
-            <form className="form" onSubmit={handleSubmit}>
-              <div className="form-group pb-3">
-                <label >Not a member? <a href="register">Register now</a></label>
-              </div>
-              <div className="form-group pb-3">
-                <label className="">Email address</label>
-                <input type="email" className={"form-control" + (errors.email ? " warning" : "")} placeholder="Enter email" name="email" value={email} onChange={handleChangeEmail} />
-                {errors.email ? <small className="form-text text-danger" >{errors.email}</small> :
-                  <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>}
-              </div>
-              <div className="form-group">
-                <label>Password</label>
-                <input type="password" className={"form-control" + (errors.password ? " warning" : "")} placeholder="Password" name="password" value={password} onChange={handleChangePassword} />
-                {errors.password && <small className="form-text text-danger" >{errors.password}</small> }
-              </div>
-              <div className="form-group pt-3">
-                <button type="submit" className="btn btn-primary">Submit</button>
-              </div>
-            </form>
-          </div>
+        <div className="col-xs-1 col-sm-2 col-md-3 col-xl-4"></div>
+        <div className="col-xs-10 col-sm-8 col-md-6 col-xl-4">
+          <form className="form" onSubmit={handleSubmit}>
+            <div className="form-group pb-3">
+              <label >Not a member? <a href="register">Register now</a></label>
+            </div>
+            <div className="form-group pb-3">
+              <label className="">Email address</label>
+              <input type="email" className={"form-control" + (errors.email ? " warning" : "")} placeholder="Enter email" name="email" value={email} onChange={handleChangeEmail} />
+              {errors.email ? <small className="form-text text-danger" >{errors.email}</small> :
+                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>}
+            </div>
+            <div className="form-group">
+              <label>Password</label>
+              <input type="password" className={"form-control" + (errors.password ? " warning" : "")} placeholder="Password" name="password" value={password} onChange={handleChangePassword} />
+              {errors.password && <small className="form-text text-danger" >{errors.password}</small> }
+            </div>
+            <div className="form-group pt-3">
+              <button type="submit" className="btn btn-primary">Submit</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

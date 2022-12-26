@@ -16,8 +16,10 @@ function NavBar({ user }) {
             <Nav.Link as={Link} to="bugs">Bugs</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link as={Link} to="login">Login</Nav.Link>
-            <Nav.Link as={Link} to="register" eventKey={2} >Register</Nav.Link>
+            {user ? <Navbar.Brand>{user.username}</Navbar.Brand> :
+              <Nav.Link as={Link} to="login">Login</Nav.Link>}
+            {user ? <Nav.Link as={Link} to="logout">Logout</Nav.Link> :
+              <Nav.Link as={Link} to="register" eventKey={2} >Register</Nav.Link>}
           </Nav>
         </Navbar.Collapse>
       </Container>

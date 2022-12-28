@@ -28,7 +28,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout user={user} onLogin={onLogin} />}>
+        <Route path="/" element={<Layout user={user} />}>
           <Route index element={<Home />} />
           <Route path="dashboard" element={<Dashboard user={user} />} />
           <Route path="projects" element={<Projects />} />
